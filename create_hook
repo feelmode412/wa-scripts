@@ -1,0 +1,45 @@
+#!/bin/bash
+
+clear
+echo "-- Git hook creator for client4 server --"
+echo ""
+echo -n "Repo name (without .git suffix): "
+read repo_name
+
+# Prepare the repo directory
+repo_dir=~/repos/webarq/$repo_name.git
+rm -Rf $repo_dir
+
+# Create the repo directory
+mkdir $repo_dir
+
+# Init git
+cd $repo_dir && git init --bare
+
+# Get the project dir
+echo -n "Project (full mode) directory: "
+read project_dir
+rm -Rf $project_dir
+
+# Create the project directory
+mkdir $project_dir
+
+# Prepare the hook file
+hook_file=$repo_dir/hooks/post-update
+
+# Create the hook file file
+touch $hook_file
+echo "#!/bin/bash" >> $hook_file
+echo "git --work-tree=$project_dir --git-dir=$repo_dir checkout -f" >> $hook_file
+
+# Get additional scripts
+echo -n "Post scripts: "
+read post_scripts
+
+# Append to hook file
+echo $post_scripts >> $hook_file
+
+# Make it executable
+chmod +x $hook_file
+
+echo "Done. Your Git remote is ssh://client4@client4.webarq.com:1903$repo_dir."
