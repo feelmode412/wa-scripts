@@ -28,7 +28,7 @@ mkdir $project_dir
 # Prepare the hook file
 hook_file=$repo_dir/hooks/post-update
 
-# Create the hook file file
+# Create the hook file
 touch $hook_file
 echo "#!/bin/bash" >> $hook_file
 echo "git --work-tree=$project_dir --git-dir=$repo_dir checkout -f" >> $hook_file
