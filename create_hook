@@ -2,6 +2,7 @@
 
 clear
 echo "-- Git hook creator for client4 server --"
+echo "If dirs already exist, they will be deleted. So, please do it carefully."
 echo ""
 echo -n "Repo name (without .git suffix): "
 read repo_name
@@ -41,5 +42,23 @@ echo $post_scripts >> $hook_file
 
 # Make it executable
 chmod +x $hook_file
+
+# Symlink
+echo -n "Need to create a symlink? (y/n) "
+read to_create_symlink
+if [ $to_create_symlink == 'y' ]
+  then
+    echo -n "Source dir : $project_dir/"
+    read symlink_source_dir
+    symlink_source_dir="$project_dir/$symlink_source_dir"
+    mkdir -p $symlink_source_dir
+
+    target_dir_prefix=/home/client4/public_html/
+    echo -n "Target dir: $target_dir_prefix"
+    read symlink_target_dir
+    symlink_target_dir=$target_dir_prefix$symlink_target_dir
+
+    ln -sf $symlink_source_dir $symlink_target_dir
+fi
 
 echo "Done. Your Git remote is ssh://client4@client4.webarq.com:1903$repo_dir."
