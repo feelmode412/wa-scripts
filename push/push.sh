@@ -21,7 +21,7 @@ git pull
 $composer self-update -vv
 $composer install -vv
 
-echo $(date)": Done ($1)." >> ~/apps/scripts/push/logs
+echo $(date)": Info: Done ($1)." >> ~/apps/scripts/push/logs
 
 # Important
 exit
