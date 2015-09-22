@@ -3,7 +3,7 @@
 me=$(whoami)
 
 if [ $me == 'vagrant' ]; then
-    composer="sudo composer"
+    composer="composer"
 else
     composer="~/composer.phar"
 fi
