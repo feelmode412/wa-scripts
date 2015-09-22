@@ -18,8 +18,8 @@ fi
 cd ~/apps/$1
 git checkout .
 git pull
-$composer self-update -vv
-$composer install -vv
+eval $composer self-update -vv
+eval $composer install -vv
 
 echo $(date)": Info: Done ($1)." >> ~/apps/scripts/push/logs
 
