@@ -20,6 +20,11 @@ fi
 # Some info
 echo $(date)": Processing $1..." >> ~/apps/scripts/push/logs
 
+# Put to maintenance mode for a while if it is a Laravel app
+if [ -f ~/apps/$1/artisan ]; then
+    php ~/apps/$1/artisan down
+fi
+
 # Git checkout
 git -C ~/apps/$1 checkout . > /dev/null
 
@@ -28,6 +33,17 @@ git -C ~/apps/$1 pull > /dev/null
 
 # Composer install
 eval "$composer install -vv --working-dir ~/apps/$1 > /dev/null"
+
+# If it is a Laravel app...
+if [ -f ~/apps/$1/artisan ]; then
+
+    # Run migrations
+    php ~/apps/$1/artisan migrate
+
+    # Put back to normal mode
+    php ~/apps/$1/artisan up
+
+fi
 
 # Success info
 echo $(date)": Info: Done ($1)." >> ~/apps/scripts/push/logs
