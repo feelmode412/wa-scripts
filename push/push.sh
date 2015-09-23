@@ -23,10 +23,13 @@ if [ ! -d $repo_dir ]; then
 fi
 
 # Some info
-echo $(date)": Processing $1..." >> $log_file
+echo $(date)": Info: Processing $1..." >> $log_file
 
 # Put to maintenance mode for a while if it is a Laravel app
 if [ -f $repo_dir/artisan ]; then
+    echo $(date)": Info: Laravel app detected." >> $log_file
+
+    echo $(date)": Info: Putting it to maintenance mode..." >> $log_file
     php $repo_dir/artisan down
 fi
 
@@ -34,15 +37,18 @@ fi
 git -C $repo_dir checkout . > /dev/null
 
 # Git pull
+echo $(date)": Info: Git pull..." >> $log_file
 git -C $repo_dir pull > /dev/null
 
 # Composer install
+echo $(date)": Info: Composer install..." >> $log_file
 eval "$composer install -vv --working-dir $repo_dir > /dev/null"
 
 # If it is a Laravel app...
 if [ -f $repo_dir/artisan ]; then
 
     # Run migrations
+    echo $(date)": Info: Running migrations..." >> $log_file
     php $repo_dir/artisan migrate
 
     # Fix weird cPanel behaviors
@@ -51,6 +57,7 @@ if [ -f $repo_dir/artisan ]; then
     chmod 644 $repo_dir/public/index.php
 
     # Put back to normal mode
+    echo $(date)": Info: Putting it back to normal mode..." >> $log_file
     php $repo_dir/artisan up
 
 fi
