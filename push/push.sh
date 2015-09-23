@@ -9,16 +9,19 @@ else
     composer="php ~/composer.phar"
 fi
 
+log_date=$(date +%y%m%d)
+log_file=~/apps/scripts/push/logs-$log_date
+
 # Check if the repo exist
 if [ ! -d ~/apps/$1 ]; then
     msg="Error: Repo '$1' does not exist."
     echo $msg
-    echo $(date)": "$msg >> ~/apps/scripts/push/logs
+    echo $(date)": "$msg >> $log_file
     exit
 fi
 
 # Some info
-echo $(date)": Processing $1..." >> ~/apps/scripts/push/logs
+echo $(date)": Processing $1..." >> $log_file
 
 # Put to maintenance mode for a while if it is a Laravel app
 if [ -f ~/apps/$1/artisan ]; then
@@ -51,4 +54,4 @@ if [ -f ~/apps/$1/artisan ]; then
 fi
 
 # Success info
-echo $(date)": Info: Done ($1)." >> ~/apps/scripts/push/logs
+echo $(date)": Info: Done ($1)." >> $log_file
