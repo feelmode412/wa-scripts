@@ -2,5 +2,5 @@
 
 while [ 1 == 1 ]; do
     ~/apps/scripts/push/runner.sh
-    sleep 10
+    sleep 5
 done
