@@ -5,7 +5,7 @@ me=$(whoami)
 if [ $me == 'vagrant' ]; then
     composer="composer"
 else
-    composer="~/composer.phar"
+    composer="php ~/composer.phar"
 fi
 
 if [ ! -d "/home/$me/apps/$1" ]; then
