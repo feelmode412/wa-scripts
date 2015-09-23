@@ -40,6 +40,11 @@ if [ -f ~/apps/$1/artisan ]; then
     # Run migrations
     php ~/apps/$1/artisan migrate
 
+    # Fix weird cPanel behaviors
+    chmod 755 ~/apps/$1
+    chmod 755 ~/apps/$1/public
+    chmod 644 ~/apps/$1/public/index.php
+
     # Put back to normal mode
     php ~/apps/$1/artisan up
 
