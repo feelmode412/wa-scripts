@@ -15,13 +15,7 @@ if [ ! -d "/home/$me/apps/$1" ]; then
     exit
 fi
 
-cd ~/apps/$1
-git checkout .
-git pull
-eval $composer self-update -vv
-eval $composer install -vv
-
-echo $(date)": Info: Done ($1)." >> ~/apps/scripts/push/logs
+echo $(date)": Processing $1..." >> ~/apps/scripts/push/logs && cd ~/apps/$1 && git checkout . && git pull && eval "$composer install -vv" && echo $(date)": Info: Done ($1)." >> ~/apps/scripts/push/logs
 
 # Important
 exit
