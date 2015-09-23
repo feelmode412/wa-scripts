@@ -12,8 +12,10 @@ fi
 log_date=$(date +%y%m%d)
 log_file=~/apps/scripts/push/logs-$log_date
 
+repo_dir=~/apps/$1
+
 # Check if the repo exist
-if [ ! -d ~/apps/$1 ]; then
+if [ ! -d $repo_dir ]; then
     msg="Error: Repo '$1' does not exist."
     echo $msg
     echo $(date)": "$msg >> $log_file
@@ -24,32 +26,32 @@ fi
 echo $(date)": Processing $1..." >> $log_file
 
 # Put to maintenance mode for a while if it is a Laravel app
-if [ -f ~/apps/$1/artisan ]; then
-    php ~/apps/$1/artisan down
+if [ -f $repo_dir/artisan ]; then
+    php $repo_dir/artisan down
 fi
 
 # Git checkout
-git -C ~/apps/$1 checkout . > /dev/null
+git -C $repo_dir checkout . > /dev/null
 
 # Git pull
-git -C ~/apps/$1 pull > /dev/null
+git -C $repo_dir pull > /dev/null
 
 # Composer install
-eval "$composer install -vv --working-dir ~/apps/$1 > /dev/null"
+eval "$composer install -vv --working-dir $repo_dir > /dev/null"
 
 # If it is a Laravel app...
-if [ -f ~/apps/$1/artisan ]; then
+if [ -f $repo_dir/artisan ]; then
 
     # Run migrations
-    php ~/apps/$1/artisan migrate
+    php $repo_dir/artisan migrate
 
     # Fix weird cPanel behaviors
-    chmod 755 ~/apps/$1
-    chmod 755 ~/apps/$1/public
-    chmod 644 ~/apps/$1/public/index.php
+    chmod 755 $repo_dir
+    chmod 755 $repo_dir/public
+    chmod 644 $repo_dir/public/index.php
 
     # Put back to normal mode
-    php ~/apps/$1/artisan up
+    php $repo_dir/artisan up
 
 fi
 
