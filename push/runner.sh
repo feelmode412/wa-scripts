@@ -1,25 +1,29 @@
 #!/bin/bash
 
 # Our base dir
-dir=~/apps/scripts/push/
+dir=~/apps/scripts/push
 
-# Then Run file
-run_file=run
-file="$dir$run_file"
+# Check if previous task is still running
+if [ -f "$dir/lock" ]; then
+    exit
+fi
 
 # Check if the run file exist
-if [ ! -f $file  ]; then
+if [ ! -f "$dir/run"  ]; then
     exit
 fi
 
 # Get the repo id
-repo_id="$(cat $file)"
+repo_id="$(cat $dir/run)"
 
 # Remove the run file
-rm -f $file
+eval "rm -f $dir/run"
 
-# The pusher file
-push_file=push.sh
+# Create the Lock file
+eval "touch $dir/lock"
 
 # Let the pusher process the repo
-eval "$dir$push_file $repo_id"
+eval "$dir/push.sh $repo_id"
+
+# Delete the Lock file
+eval "rm $dir/lock"
