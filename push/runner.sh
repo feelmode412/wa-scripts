@@ -8,16 +8,16 @@ if [ -f "$dir/lock" ]; then
     exit
 fi
 
-# Check if the run file exist
-if [ ! -f "$dir/run"  ]; then
+# Check if the job file exist
+if [ ! -f "$dir/job"  ]; then
     exit
 fi
 
 # Get the repo id
-repo_id="$(cat $dir/run)"
+repo_id="$(cat $dir/job)"
 
-# Remove the run file
-eval "rm -f $dir/run"
+# Remove the job file
+eval "rm -f $dir/job"
 
 # Create the Lock file
 eval "touch $dir/lock"

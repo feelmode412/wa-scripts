@@ -4,4 +4,4 @@ if (!$_GET['id']) {
     die('WTF!');
 }
 
-exec('echo "'.$_GET['id'].'" > run');
+exec('echo "'.$_GET['id'].'" > job');
