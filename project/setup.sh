@@ -46,7 +46,7 @@ chmod 644 $path/public/index.php
 php ~/composer.phar install -vv --working-dir $path
 
 # Give it the env file
-cp .env $path/.env
+cp ~/apps/scripts/project/.env $path/.env
 
 # Input db name
 echo -n "Database name: client3_"
