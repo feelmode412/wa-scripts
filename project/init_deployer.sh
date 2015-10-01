@@ -3,7 +3,7 @@
 clear
 echo "<<< Laravel Project Initial Deployer @ $(whoami) >>>"
 echo ""
-echo "Usage: setup repo-name [destination-dir-name]"
+echo "Usage: init_deployer.sh repo-name [destination-dir-name]"
 echo ""
 
 if [ ! $1 ]; then
