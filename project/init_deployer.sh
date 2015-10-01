@@ -43,7 +43,16 @@ chmod 755 $path/public
 chmod 644 $path/public/index.php
 
 # Run Composer
-php ~/composer.phar install -vv --working-dir $path
+if [ -f ~/composer.phar ]; then
+    composer="php ~/composer.phar"
+elif [ -f /usr/local/bin/composer ]; then
+    composer="/usr/local/bin/composer"
+else
+    echo "Error: Composer not found."
+    exit
+fi
+
+eval "$composer install -vv --working-dir $path"
 
 # Give it the env file
 cp ~/apps/scripts/project/.env $path/.env
