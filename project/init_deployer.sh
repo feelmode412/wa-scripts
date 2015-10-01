@@ -49,7 +49,7 @@ php ~/composer.phar install -vv --working-dir $path
 cp ~/apps/scripts/project/.env $path/.env
 
 # Input db name
-echo -n "Database name: $(whoami)_"
+echo -n "Database name: "
 read db_name
 echo "DB_DATABASE=$db_name" >> $path/.env
 
