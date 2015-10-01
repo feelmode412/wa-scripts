@@ -66,5 +66,5 @@ echo "Creating symlink..."
 ln -s $path/public ~/public_html/$dest
 
 echo "Done."
-echo "Webhook URL: http://client3.webarq.com/webhook/add-job.php?id=$1"
+echo "Webhook URL: http://client3.webarq.com/webhook/add-job.php?id=$dest"
 echo "App access: http://client3.webarq.com/$dest"
