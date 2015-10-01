@@ -23,7 +23,7 @@ if [ -d $path ]; then
 fi
 
 if [ -L ~/public_html/$dest ]; then
-    echo "Error: http://client3.webarq.com/$dest already exists."; exit
+    echo "Error: http://$(whoami).webarq.com/$dest already exists."; exit
 fi
 
 echo "Cloning \"$1\" repo as \"$dest\"..."
@@ -49,7 +49,7 @@ php ~/composer.phar install -vv --working-dir $path
 cp ~/apps/scripts/project/.env $path/.env
 
 # Input db name
-echo -n "Database name: client3_"
+echo -n "Database name: $(whoami)_"
 read db_name
 echo "DB_DATABASE=$db_name" >> $path/.env
 
@@ -66,5 +66,5 @@ echo "Creating symlink..."
 ln -s $path/public ~/public_html/$dest
 
 echo "Done."
-echo "Webhook URL: http://client3.webarq.com/webhook/add-job.php?id=$dest"
-echo "App access: http://client3.webarq.com/$dest"
+echo "Webhook URL: http://$(whoami).webarq.com/webhook/add-job.php?id=$dest"
+echo "App access: http://$(whoami).webarq.com/$dest"
