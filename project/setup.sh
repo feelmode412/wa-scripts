@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-echo "<<< Laravel Project Deployment Setup @ $(whoami) >>>"
+echo "<<< Laravel Project Initial Deployer @ $(whoami) >>>"
 echo ""
 echo "Usage: setup repo-name [destination-dir-name]"
 echo ""
