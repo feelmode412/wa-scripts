@@ -19,7 +19,7 @@ fi
 path=~/apps/$dest
 
 if [ -d $path ]; then
-    echo "Error: Project already exists."; exit
+    echo "Error: Project already exists. Please change your [destination-dir-name]."; exit
 fi
 
 if [ -L ~/public_html/$dest ]; then
