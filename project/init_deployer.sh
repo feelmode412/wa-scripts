@@ -76,6 +76,7 @@ php $path/artisan key:generate
 echo "Creating symlink..."
 ln -s $path/public ~/public_html/$dest
 
+echo ""
 echo "Done."
 echo "Webhook URL: http://$(whoami).webarq.com/webhook/add-job.php?id=$dest"
 echo "App access: http://$(whoami).webarq.com/$dest"
