@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-echo "<<< Laravel Project Initial Deployer @ $(whoami) >>>"
+echo "<<< Laravel Projects Auto-Deploy Builder @ $(whoami) >>>"
 echo ""
 echo "Usage: init_deployer.sh repo-name [destination-dir-name]"
 echo ""
