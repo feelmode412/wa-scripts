@@ -26,6 +26,10 @@ if [ -L ~/public_html/$dest ]; then
     echo "Error: http://$(whoami).webarq.com/$dest already exists."; exit
 fi
 
+if [ ! -f ~/apps/scripts/project/.env ]; then
+    echo "Error: The .env file not found."; exit
+fi
+
 echo "Cloning \"$1\" repo as \"$dest\"..."
 git clone ssh://git@git.webarq.com:1903/webarq/$1.git $path 2> git_clone_output
 
