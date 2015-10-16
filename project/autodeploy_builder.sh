@@ -3,7 +3,7 @@
 clear
 echo "<<< Laravel Projects Auto-Deploy Builder @ $(whoami) >>>"
 echo ""
-echo "Usage: init_deployer.sh repo-name [destination-dir-name]"
+echo "Usage: bash autodeploy_builder.sh repo-name [destination-dir-name]"
 echo ""
 
 if [ ! $1 ]; then
