@@ -56,8 +56,6 @@ else
     exit
 fi
 
-eval "$composer install -vv --working-dir $path"
-
 # Give it the env file
 cp ~/apps/scripts/project/.env $path/.env
 
@@ -67,6 +65,8 @@ read db_name
 
 # Tell .env the db name
 echo "DB_DATABASE=$db_name" >> $path/.env
+
+eval "$composer install -vv --working-dir $path"
 
 # Run migrations
 echo "Running migrations..."
