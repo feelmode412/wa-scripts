@@ -26,6 +26,10 @@ if [ -L ~/public_html/$dest ]; then
     echo "Error: http://$(whoami).webarq.com/$dest already exists."; exit
 fi
 
+if [ ! -f ~/apps/scripts/project/conf.cfg ]; then
+    echo "Error: The config file not found."; exit
+fi
+
 if [ ! -f ~/apps/scripts/project/.env ]; then
     echo "Error: The .env file not found."; exit
 fi
@@ -80,7 +84,9 @@ php $path/artisan key:generate
 echo "Creating symlink..."
 ln -s $path/public ~/public_html/$dest
 
+source ~/apps/scripts/project/conf.cfg
+
 echo ""
 echo "Done."
-echo "Webhook URL: http://$(whoami).webarq.com/webhook/add-job.php?id=$dest"
-echo "App URL: http://$(whoami).webarq.com/$dest"
+echo "Webhook URL: http://$hostname/webhook/add-job.php?id=$dest"
+echo "App URL: http://$hostname/$dest"
