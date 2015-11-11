@@ -6,6 +6,10 @@ if [ ! "$git_url" ]; then
     echo "Error: Git URL not set."; exit
 fi
 
+if [ ! "$hostname" ]; then
+    echo "Error: Hostname not set."; exit
+fi
+
 clear
 echo "<<< Laravel Projects Auto-Deploy Builder @ $(whoami) >>>"
 echo ""
