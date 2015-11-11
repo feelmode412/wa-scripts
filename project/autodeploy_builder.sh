@@ -2,6 +2,10 @@
 
 source ~/apps/scripts/project/conf.cfg
 
+if [ ! "$git_command" ]; then
+    git_command="git"
+fi
+
 if [ ! "$git_url" ]; then
     echo "Error: Git URL not set."; exit
 fi
