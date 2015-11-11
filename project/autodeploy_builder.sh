@@ -1,5 +1,11 @@
 #!/bin/bash
 
+source ~/apps/scripts/project/conf.cfg
+
+if [ ! "$git_url" ]; then
+    echo "Error: Git URL not set."; exit
+fi
+
 clear
 echo "<<< Laravel Projects Auto-Deploy Builder @ $(whoami) >>>"
 echo ""
@@ -35,7 +41,7 @@ if [ ! -f ~/apps/scripts/project/.env ]; then
 fi
 
 echo "Cloning \"$1\" repo as \"$dest\"..."
-git clone ssh://git@git.webarq.com:1903/webarq/$1.git $path 2> git_clone_output
+eval "$git_command clone $git_url/$1.git $path 2> git_clone_output"
 
 if grep -Fxq "Access denied." git_clone_output; then
     echo "Error: Repo not found on server."
@@ -83,8 +89,6 @@ php $path/artisan key:generate
 # Create symlink
 echo "Creating symlink..."
 ln -s $path/public ~/public_html/$dest
-
-source ~/apps/scripts/project/conf.cfg
 
 echo ""
 echo "Done."
